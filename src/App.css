@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* Reduce the width of the container */
+.flex-container {
+  display: flex;
+  max-width: 800px; /* Adjust the width to your preference */
+  margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Adjust the width of the Table */
+.table-container {
+  flex: 1; /* Allow the Table to take up available space */
+  margin-right: 10px; /* Add some space between Table and BarChart */
+}
+
+/* Adjust the width of the BarChart */
+.chart-container {
+  flex: 4; /* Allow the BarChart to take up available space */
+}
