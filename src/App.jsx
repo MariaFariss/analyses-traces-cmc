@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import BarChart from "./BarChartComponent";
+import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
   const [data, setData] = useState([]);
@@ -62,20 +63,65 @@ function App() {
     }
   }
  
+// return (
+//   <div className="App">
+//     <h1>{title}</h1>
+//     <Form.Select aria-label="Default select example" onClick={selectOnclick}>
+//       <option>Open this select menu</option>
+//       <option value="Ranking">Ranking</option>
+//       <option value="Max Signin Days For All Users">Max Signin Days For All Users</option>
+//       <option value="Replied messages For All Users">Replied messages For All Users</option>
+//       <option value="Spent Time Per Day For All Users">Spent Time Per Day For All Users</option>
+//       <option value="File shared Per Personn">File shared Per Personn</option>
+//     </Form.Select>
+//     <div className="flex-container">
+//       <div className="table-container">
+//         <Table striped bordered hover size="sm">
+//           <thead>
+//             <tr>
+//               <th>Ranking</th>
+//               <th>Name</th>
+//               <th>Score</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {data.map((value) => (
+//               <tr key={value.cle}>
+//                 <td>{value.classement}</td>
+//                 <td>{value.cle}</td>
+//                 <td>{value.score}</td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </Table>
+//       </div>
+
+//       <div className="chart-container">
+//         <BarChart datas={scores} title={title} labels={labels} />
+//       </div>
+//     </div>
+//   </div>
+// );
+
+
 return (
   <div className="App">
     <h1>{title}</h1>
-    <Form.Select aria-label="Default select example" onClick={selectOnclick}>
-      <option>Open this select menu</option>
-      <option value="Ranking">Ranking</option>
-      <option value="Max Signin Days For All Users">Max Signin Days For All Users</option>
-      <option value="Replied messages For All Users">Replied messages For All Users</option>
-      <option value="Spent Time Per Day For All Users">Spent Time Per Day For All Users</option>
-      <option value="File shared Per Personn">File shared Per Personn</option>
-    </Form.Select>
+    <div className="select-container">
+      <Form.Select
+        aria-label="Default select example"
+        onClick={selectOnclick}
+        className="select-input smaller">
+        <option value="Ranking">Ranking</option>
+        <option value="Max Signin Days For All Users">Max Signin Days For All Users</option>
+        <option value="Replied messages For All Users">Replied messages For All Users</option>
+        <option value="Spent Time Per Day For All Users">Spent Time Per Day For All Users</option>
+        <option value="File shared Per Personn">File shared Per Personn</option>
+      </Form.Select>
+    </div>
     <div className="flex-container">
       <div className="table-container">
-        <Table striped bordered hover size="sm">
+        <Table striped bordered hover size="sm" Light  >
           <thead>
             <tr>
               <th>Ranking</th>
@@ -101,5 +147,6 @@ return (
     </div>
   </div>
 );
+
             }
 export default App;
