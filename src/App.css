@@ -42,14 +42,15 @@
 .flex-container {
   display: flex;
   align-items: center;
-  max-width: 800px; /* Adjust the width to your preference */
-  margin: 0 auto; /* Center the container horizontally */
+  max-width: 800px; 
+  margin: 0 auto; 
 }
 
 /* Adjust the width of the Table */
 .table-container {
-  flex: 1; /* Allow the Table to take up available space */
-  margin-right: 10px; /* Add some space between Table and BarChart */
+  flex: 1; 
+  margin-right: 10px; 
+  width: 500px;
 }
 
 /* Adjust the width of the BarChart */
@@ -83,4 +84,23 @@
 /* Reduce the width of the select input */
 .select-input.smaller {
   width: 200px; /* Adjust the width to your preference */
+}
+
+
+/* Style test */
+.containers {
+  border: 1px solid #0e0e0e; /* Add borders to all containers */
+  padding: 15px; /* Add some padding for a cleaner look */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  
+
+}
+
+.table-container {
+  width: 60%; /* Set the width of the table container */
+  margin-right: 50px;
+}
+
+.chart-container {
+  width: 40%; /* Set the width of the chart container */
 }
