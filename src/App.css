@@ -42,20 +42,18 @@
 .flex-container {
   display: flex;
   align-items: center;
-  max-width: 800px; 
+  max-width: 5000px; 
   margin: 0 auto; 
 }
 
 /* Adjust the width of the Table */
-.table-container {
-  flex: 1; 
-  margin-right: 10px; 
-  width: 500px;
+.table {
+  margin-right: 30px; 
 }
 
 /* Adjust the width of the BarChart */
-.chart-container {
-  flex: 4; /* Allow the BarChart to take up available space */
+.chart { 
+  width: 100%;
 }
 
 .select-container {
@@ -96,11 +94,8 @@
 
 }
 
-.table-container {
-  width: 60%; /* Set the width of the table container */
-  margin-right: 50px;
-}
-
-.chart-container {
-  width: 40%; /* Set the width of the chart container */
+.apex-chart {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
