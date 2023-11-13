@@ -41,7 +41,7 @@ export default function BarChartComponent({title, labels, datas}) {
       {
         label: labels,
         data: datas,
-        backgroundColor: 'rgb(197, 182, 255)',
+        backgroundColor: 'rgb(255, 136, 153)',
         },
     ],
   };
