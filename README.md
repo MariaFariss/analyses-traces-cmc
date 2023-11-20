@@ -33,5 +33,3 @@ To start the front-end server, use the following command:
 ```bash
 npm run start
 ```
-
-Enjoy exploring the data and predicting student option choices!
