@@ -7,10 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 export default function BasicTable({data}) {
   return (
-    <TableContainer >
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer>
+    <Table>
         <TableHead>
-          <TableRow>
+          <TableRow sx= {{backgroundColor: "#FFFAF8"}}>
             <TableCell align="center">Name</TableCell>
             <TableCell align="center">Ranking</TableCell>
             <TableCell align="center">Score</TableCell>
@@ -20,7 +20,7 @@ export default function BasicTable({data}) {
           {data.map((row) => (
             <TableRow
               key={row.cle}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 }, backgroundColor: "#FFFAF8" }}
             >
               <TableCell align="center">{row.cle}</TableCell>
               <TableCell align="center">{row.classement}</TableCell>

@@ -25,7 +25,7 @@ function App() {
   var [scores, setScores] = useState([]);
   var [labels, setLabels] = useState([]);
   var [description, setDescription] = useState(descriptions[0]);
-  var [title, setTitle] = useState("Ranking");
+  var [title, setTitle] = useState(titles[0]);
 
 
   
@@ -87,11 +87,10 @@ return (
   <div className="App">
     <h1>{title}</h1>
     <div className="select-container">
-      <Form.Select
+      <Form.Select style={{backgroundColor: "#FFFAF8"}}
         aria-label="Default select example"
         onClick={selectOnclick}
-        className="select-input smaller"
-      >
+        className="select-input smaller">
         <option value="Ranking">Classement général</option>
         <option value="Max Signin Days For All Users">Nombre maximum de jours de connexion d'affilées</option>
         <option value="Replied messages For All Users">Nombre de messages répondus</option>
