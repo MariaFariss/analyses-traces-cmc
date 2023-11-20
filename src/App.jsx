@@ -1,14 +1,10 @@
-import logo from "./logo.svg";
 import "./App.css";
-import Table from "react-bootstrap/Button";
-// import Modal from "react-bootstrap/Modal";
-import BasicTable from "./TableComponent";
-import BarChart from "./BarChart";
-import ApexChart from "./ApexChartComponent";
+import BasicTable from "./components/TableComponent";
+import ApexChart from "./components/ApexChartComponent";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
-import BarChartComponent from "./BarChartComponent";
+import BarChartComponent from "./components/BarChartComponent";
 import 'bootstrap/dist/css/bootstrap.css';
 
 
@@ -40,7 +36,6 @@ function App() {
     datas.sort((a, b) => a.classement - b.classement);
     setScores(datas.map((value)=>(value.score)));
     setLabels(datas.map((value) => (value.cle)));
-    // console.log(datas);
     setData(datas);
   }
 
@@ -105,17 +100,16 @@ return (
       </Form.Select>
     </div>
     
-
     <div className="flex-container">
       <div className="containers table">
         <BasicTable data={data}/>
       </div>
-
         <div className="apex-chart">
           <div className="containers chart">
             <p>{description}</p>
+          </div>
+          <div className="containers chart">
             <BarChartComponent datas={scores} title={title} labels={labels} />
-            {/* <BarChart datas={scores} labels={labels} title={title}/> */}
           </div> 
 
           <div className="containers chart">

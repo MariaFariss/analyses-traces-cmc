@@ -1,23 +1,10 @@
-# Requirements :
-#u should type this command down : pip install -r requirements.txt
-# pip install sqlalchemy
-# pip install pymysql
-#pip install pandas
-
-# for the api
-# pip install fastapi
-# pip install uvicorn
-#.\mon_env_analyse_des_donnes\Scripts\activate
-# python3 -m uvicorn main:app --reload or uvicorn main:app --reload
-# pip install fastapi uvicorn
-
 from sqlalchemy import create_engine
 import pandas as pd
 import numpy as np
 import json
 
-# Créer le moteur de base de données
-# Remplacez 'username', 'password' et 'database_name' par vos informations d'identification de base de données
+# Create the database engine
+# Replace 'username', 'password', and 'database_name' with your database credentials
 engine = create_engine('mysql+pymysql://root:@localhost:3306/datamadeth')
 
 def convertir_heure_en_secondes(heure):
@@ -25,28 +12,25 @@ def convertir_heure_en_secondes(heure):
     return h * 3600 + m * 60 + s
 
 def sqlToDataModel() :
-    # Définir votre requête SQL
+   # Define your SQL queries
     queryTransition = "SELECT Utilisateur, Titre, Date, Heure FROM transition"
     queryFile = "SELECT User,Filenameo, Dateupload, Timeupload FROM userfiles"
-    # Exécuter la requête SQL et charger le résultat dans un DataFrame pandas
+     # Execute the SQL queries and load the results into Pandas DataFrames
     transitionData = pd.read_sql(queryTransition, engine)
     fileData = pd.read_sql(queryFile, engine)
     fileData["Filenameo"] = fileData["Filenameo"].apply(lambda filename : "fileUpload: " + filename)
-    # print(transitionData, fileData)
-
-    #rename the fileData by the transitionData colums
+  
+    #rename the fileData by the transitionData columns
     fileData.columns = transitionData.columns
 
     # Concatenate the dataframes
     datas = pd.concat([transitionData, fileData])
     datas["Heure"] = datas["Heure"].apply(lambda x: str(x))
     datas.to_json('datas.json', orient='records')
+    
 
-# sqlToDataModel()
-
-#Moteur
-
-############First criterea : actif student in the paltform by calculating the average spent time per personn every day in the app in seonds ############
+# Engine: The database engine
+# First criterion: identify active students by calculating the average time spent per person each day in the application in seconds
 def filterData(type, df):
     dataSet = df[type].unique()
     data_dict = {data: df[df[type] == data] for data in dataSet}
@@ -68,9 +52,9 @@ def timeStampMinutsPerUserPerDay(list_timestamps):
 
 def averageSpentTimePerDayPerUser():
     df = pd.read_json('datas.json')
-    #filter par utilisateurs et les mettre dans un dictionnaire comme key user et comme value son dataframe
+    # Filter by users and put them into a dictionary with the user as the key and their dataframe as the value
     filterDateTable = filterData("Utilisateur",df)
-    #appliquer sur la dataframe de chaque user un filter pour avoir la dataframe de chque jour de chaque utilisateur
+   # Apply on each user's dataframe a filter to get the dataframe of each day of each user
     averageTimes = {}
     for key, value in filterDateTable.items():
         activePeriods = []
@@ -81,15 +65,11 @@ def averageSpentTimePerDayPerUser():
             nbJour+=1
         averageTimes[key] = np.array(activePeriods).mean()/nbJour
     return averageTimes
-
-# sqlToDataModel()
 average_Spent_TimePerDayPerUser = averageSpentTimePerDayPerUser()
 
 
-
-###### Second critirea : regular student in terms of login by calculating for every personn the number of consecutif days they have logged in #####
-
-# Vérifier si les dates sont consécutives
+# Second criterion: regular students in terms of logins by calculating the number of consecutive days they have logged in for each person #
+# Check if dates are consecutive
 def consecutiveDays(timestamp1, timestamp2):
     return (timestamp2 - timestamp1).days == 1
 
@@ -117,7 +97,6 @@ def maxDayofSigningPerPersonn():
             else :
                 counterPerPerson=0
         d[key] = getMaxCounter(listOptimalCounteur)
-    # print(d)
     return d
 
 
@@ -138,8 +117,8 @@ def countRepliedMsgPerPersonn():
     return results
 replied_msg_results = countRepliedMsgPerPersonn()
 
-#######Fourth criteria : the average number sent per personn and per day ########
 
+# Fourth criterion: the average number sent per person and per day #
 def countFilePerPersonn():
     df = pd.read_json('datas.json')
     count = 0
@@ -156,16 +135,6 @@ def countFilePerPersonn():
 # To count files per person
 files_results = countFilePerPersonn()
 
-# Save the results to a JSON file
-# all_results = {
-#     "replied_msg_results": replied_msg_results,
-#     "files_results": files_results,
-#     "maxDayofSigningPerPersonn":max_Day_of_SigningPerPersonn,
-#     "average_Spent_TimePerDayPerUser" : average_Spent_TimePerDayPerUser
-# }
-# with open('all_results.json', 'w') as json_file:
-#     json.dump(all_results, json_file)
-
 
 #########score calculations #####
 def scorePerPerson(typeDict, reversed):
@@ -178,8 +147,6 @@ def scorePerPerson(typeDict, reversed):
     for user, value in typeDict.items():
         dictResult[user] = {"classement" : list.index(value) +1,  "score" : value}  
     return dictResult
-
-# print(scorePerPerson(maxDayofSigningPerPersonn(), True))
 
 def finalRanking():
     maxSignin = scorePerPerson(maxDayofSigningPerPersonn(), True)
